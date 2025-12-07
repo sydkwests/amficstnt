@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- UPDATED: Title -->
+    <title>Amfics - Premium Travel</title>
+    <meta name="description" content="Reliable intercity transport and private chauffeur services across Saudi Arabia.">
+
+    <!-- UPDATED: Favicon set to .ico -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+
+    <!-- NEW: Open Graph / Social Media Sharing Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Amfics - Premium Travel">
+    <meta property="og:description" content="Curated journeys to Makkah, Madinah, and beyond. Experience travel reimagined for the modern pilgrim and executive.">
+    <!-- Ensure this image exists in your assets folder for the preview to work -->
+    <meta property="og:image" content="assets/images/hero-section.jpg"> 
+    <meta property="og:url" content="https://amfics.co"> <!-- Replace with your actual domain when live -->
+    <meta property="og:site_name" content="Amfics">
+
+    <!-- NEW: Twitter Card Data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Amfics - Premium Travel">
+    <meta name="twitter:description" content="Reliable intercity transport and private chauffeur services across Saudi Arabia.">
+    <meta name="twitter:image" content="assets/images/hero-section.jpg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter & Plus Jakarta Sans for that premium feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#DC2626',
+                            dark: '#0A0A0A',
+                            gray: '#F4F4F5',
+                            light: '#FFFFFF',
+                            muted: '#A1A1AA'
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'glow': '0 0 20px rgba(220, 38, 38, 0.3)',
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://www.transparenttextures.com/patterns/cubes.png')", // Subtle texture
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for that specific 'Inspo' look */
+        body {
+            background-color: #F8F9FB; /* Very light gray/white background */
+            color: #1a1a1a;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .dark body {
+            background-color: #0A0A0A;
+            color: #ffffff;
+        }
+
+        /* Enhanced Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        
+        .dark .glass-card {
+            background: rgba(20, 20, 20, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-image-mask {
+            /* The organic rounded shape from the screenshot */
+            border-radius: 40% 40% 40% 40% / 60% 60% 40% 40%;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            transition: all 0.5s ease;
+        }
+        
+        .hero-image-mask:hover {
+             border-radius: 50%;
+             transform: scale(1.02);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #DC2626;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Modal Transitions */
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scale(0.95);
+        }
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        /* Swiper Customization for Fleet */
+        .swiper {
+            width: 100%;
+            padding-bottom: 50px;
+            overflow: visible !important; /* Allow peek effect */
+        }
+        .swiper-slide {
+            opacity: 0.4;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: scale(0.9);
+        }
+        .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+        }
+        .fleet-info {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            display: none; /* Hidden by default, JS toggles it */
+        }
+        .fleet-info.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .animate-float-delay {
+            animation: float 5s ease-in-out infinite 1s;
+        }
+        
+        /* Form Error State */
+        .input-error {
+            border-color: #EF4444 !important; /* Red-500 */
+            background-color: #FEF2F2 !important; /* Red-50 */
+        }
+        .dark .input-error {
+             background-color: #450a0a !important; /* Red-950 */
+        }
+        .input-error::placeholder {
+            color: #F87171 !important;
+        }
+        
+        /* Pagination Dots Color fix for Dark Mode */
+        .swiper-pagination-bullet-active {
+            background-color: #DC2626 !important;
+        }
+        .dark .swiper-pagination-bullet {
+            background-color: #555;
+        }
+        .dark .swiper-pagination-bullet-active {
+            background-color: #DC2626;
+        }
+
+        /* Warp Line Animation */
+        @keyframes warpPulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+        }
+        .warp-lines {
+            animation: warpPulse 6s ease-in-out infinite;
+        }
+        .warp-lines-delay {
+            animation: warpPulse 6s ease-in-out infinite 3s;
+        }
+
+        /* Liquid/Glass Blob Animation */
+        @keyframes liquidMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        .liquid-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: liquidMove 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+        .dark .liquid-blob {
+            opacity: 0.3;
+        }
+
+        /* GLOBAL RED GLOW BLOBS - UPDATED FOR LIGHT MODE VISIBILITY */
+        .glow-red {
+            position: absolute;
+            /* Increased opacity for Light Mode visibility (0.4) */
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.4) 0%, rgba(220, 38, 38, 0) 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .dark .glow-red {
+            /* Reduced for Dark Mode as contrast is higher */
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0) 70%);
+        }
+
+        /* Scroll Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* FAQ Accordion Styles */
+        .faq-item {
+            border-bottom: 1px solid rgba(161, 161, 170, 0.2);
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-button {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .faq-button:hover {
+            color: #DC2626;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .faq-answer p {
+            padding-bottom: 1.5rem;
+            color: #A1A1AA;
+        }
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-red selection:text-white dark:bg-brand-dark dark:text-white transition-colors duration-300">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 px-4 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto bg-white/70 dark:bg-brand-dark/70 backdrop-blur-xl rounded-full shadow-sm border border-white/40 dark:border-white/10 px-6 py-3 flex justify-between items-center transition-colors duration-300">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <!-- Text only, All Caps -->
+                <span class="font-display font-bold text-2xl tracking-tight text-brand-dark dark:text-white uppercase">AMFICS</span>
+            </div>
+
+            <!-- Center Links (Desktop) -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600 dark:text-gray-300">
+                <a href="#home" class="nav-link hover:text-brand-dark dark:hover:text-white transition-colors">Home</a>
+                <a href="#services" class="nav-link hover:text-brand-dark dark:hover:text-white transition-colors">Services</a>
+                <a href="#fleet" class="nav-link hover:text-brand-dark dark:hover:text-white transition-colors">Fleet</a>
+                <a href="#features" class="nav-link hover:text-brand-dark dark:hover:text-white transition-colors">Why Us</a>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" class="w-9 h-9 rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20 transition-colors flex items-center justify-center focus:outline-none">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+
+                <!-- Primary Button -->
+                <button onclick="openModal('General Inquiry')" class="bg-brand-dark dark:bg-white dark:text-brand-dark text-white text-sm font-semibold py-2.5 px-6 rounded-full hover:bg-brand-red dark:hover:bg-brand-red dark:hover:text-white hover:shadow-glow transition-all duration-300 flex items-center gap-2 group">
+                    <span>Inquire Now</span>
+                    <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative pt-32 pb-20 lg:pb-28 px-4 md:px-8 min-h-screen flex items-center overflow-hidden bg-transparent">
+        
+        <!-- Premium Background Effects (Warp Lines & Glow) -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+            <!-- New Liquid/Glass Blobs -->
+            <div class="liquid-blob w-96 h-96 bg-red-400/30 dark:bg-red-900/20 top-[-100px] left-[-100px]"></div>
+            <div class="liquid-blob w-80 h-80 bg-blue-300/30 dark:bg-blue-900/20 bottom-[10%] right-[-50px] animation-delay-2000"></div>
+            <div class="liquid-blob w-64 h-64 bg-purple-300/20 dark:bg-purple-900/10 top-[20%] left-[30%] animation-delay-4000"></div>
+
+            <!-- Left Side Curves -->
+            <svg class="absolute top-0 left-0 h-full w-full md:w-1/2 opacity-20 dark:opacity-10 transform -translate-x-[10%]" viewBox="0 0 600 1000" fill="none" preserveAspectRatio="none">
+                <!-- Outer Line -->
+                <path d="M-100 0 C 150 300, 150 700, -100 1000" stroke="url(#warpGradientLeft)" stroke-width="2" class="warp-lines"/>
+                <!-- Middle Line -->
+                <path d="M-50 0 C 200 350, 200 650, -50 1000" stroke="url(#warpGradientLeft)" stroke-width="1.5" class="warp-lines-delay"/>
+                <!-- Inner Line -->
+                <path d="M0 0 C 250 400, 250 600, 0 1000" stroke="url(#warpGradientLeft)" stroke-width="1" class="warp-lines"/>
+                
+                <defs>
+                    <linearGradient id="warpGradientLeft" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#DC2626" stop-opacity="0"/>
+                        <stop offset="50%" stop-color="#DC2626" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#DC2626" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <!-- Right Side Curves (Mirrored) -->
+            <svg class="absolute top-0 right-0 h-full w-full md:w-1/2 opacity-20 dark:opacity-10 transform translate-x-[10%] scale-x-[-1]" viewBox="0 0 600 1000" fill="none" preserveAspectRatio="none">
+                <!-- Outer Line -->
+                <path d="M-100 0 C 150 300, 150 700, -100 1000" stroke="url(#warpGradientRight)" stroke-width="2" class="warp-lines-delay"/>
+                <!-- Middle Line -->
+                <path d="M-50 0 C 200 350, 200 650, -50 1000" stroke="url(#warpGradientRight)" stroke-width="1.5" class="warp-lines"/>
+                <!-- Inner Line -->
+                <path d="M0 0 C 250 400, 250 600, 0 1000" stroke="url(#warpGradientRight)" stroke-width="1" class="warp-lines-delay"/>
+                
+                <defs>
+                    <linearGradient id="warpGradientRight" x1="0" y1="0" x2="0" y2="1">
+                        <!-- Using Blue accent for the right side for a subtle 'Travel/Sky' contrast -->
+                        <stop offset="0%" stop-color="#2563EB" stop-opacity="0"/> <!-- Blue-600 -->
+                        <stop offset="50%" stop-color="#2563EB" stop-opacity="0.6"/>
+                        <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            
+            <!-- Left Content -->
+            <div class="space-y-8 z-10 relative">
+                
+                <!-- Pills / Badges -->
+                <div class="flex flex-wrap items-center gap-3 animate-fade-in-up animate-on-scroll">
+                    <div class="flex items-center gap-2 bg-blue-50/50 backdrop-blur-sm dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 px-3 py-1.5 rounded-full text-xs font-semibold text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Premium Chauffeurs</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-red-50/50 backdrop-blur-sm dark:bg-red-900/30 border border-red-100 dark:border-red-800 px-3 py-1.5 rounded-full text-xs font-semibold text-brand-red dark:text-red-400">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Saudi Arabia</span>
+                    </div>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold text-brand-dark dark:text-white leading-[1.1] tracking-tight animate-on-scroll" style="transition-delay: 100ms;">
+                    EXPLORE <br>
+                    THE KINGDOM <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-orange-600">YOUR WAY</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-lg text-gray-500 dark:text-gray-400 max-w-lg leading-relaxed animate-on-scroll" style="transition-delay: 200ms;">
+                    Curated journeys to Makkah, Madinah, and beyond. From hidden gems to holy sites, experience travel reimagined for the modern pilgrim and executive.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap items-center gap-4 pt-2 animate-on-scroll" style="transition-delay: 300ms;">
+                    <button onclick="openModal('Plan Your Trip')" class="bg-brand-red text-white font-semibold py-4 px-8 rounded-2xl shadow-glow hover:bg-red-700 hover:scale-[1.02] transition-all duration-300 flex items-center gap-2 relative overflow-hidden group">
+                        <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+                        <i class="fas fa-calculator relative z-10"></i>
+                        <span class="relative z-10">Plan Your Trip</span>
+                    </button>
+                    <!-- UPDATED: Changed to <a> tag so it scrolls correctly -->
+                    <a href="#fleet" class="bg-white/80 dark:bg-white/5 backdrop-blur-sm border border-gray-200 dark:border-white/10 text-brand-dark dark:text-white font-semibold py-4 px-8 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/10 transition-all duration-300 flex items-center gap-2 group cursor-pointer">
+                        <i class="fas fa-car text-xs group-hover:text-brand-red transition-colors"></i>
+                        <span>View Fleet</span>
+                    </a>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-3 gap-4 pt-8 animate-on-scroll" style="transition-delay: 400ms;">
+                    <!-- UPDATED: Added Car Icon to Driven Stats -->
+                    <div class="glass-card p-4 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+                        <div class="flex justify-between items-start mb-1">
+                            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium group-hover:text-brand-red transition-colors">Driven</p>
+                            <i class="fas fa-road text-gray-300 dark:text-gray-600 group-hover:text-brand-red transition-colors text-xs"></i>
+                        </div>
+                        <p class="text-2xl font-bold text-brand-dark dark:text-white">80K+ <span class="text-sm text-gray-400 font-normal">km</span></p>
+                    </div>
+                    
+                    <div class="glass-card p-4 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+                        <div class="flex justify-between items-start mb-1">
+                            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium group-hover:text-brand-red transition-colors">Travelers</p>
+                            <i class="fas fa-users text-gray-300 dark:text-gray-600 group-hover:text-brand-red transition-colors text-xs"></i>
+                        </div>
+                        <p class="text-2xl font-bold text-brand-dark dark:text-white">50K+</p>
+                    </div>
+                    
+                    <div class="glass-card p-4 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+                        <div class="flex justify-between items-start mb-1">
+                            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium group-hover:text-brand-red transition-colors">Reviews</p>
+                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        </div>
+                        <p class="text-2xl font-bold text-brand-dark dark:text-white flex items-center gap-1">
+                            4.9
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Content (Image & Floating Elements) -->
+            <div class="relative flex justify-center lg:justify-end animate-on-scroll" style="transition-delay: 500ms;">
+                
+                <!-- Main Masked Image -->
+                <div class="hero-image-mask relative w-full max-w-[550px] aspect-[4/5] md:aspect-square z-10">
+                    <img src="assets/images/hero-section.jpg" 
+                         alt="Hyundai Staria in Saudi Desert" 
+                         class="w-full h-full object-cover shadow-2xl"
+                         onerror="this.src='https://images.unsplash.com/photo-1626863905192-3eff63ed679d?auto=format&fit=crop&q=80&w=1000'">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                </div>
+
+                <!-- Floating Card 1: Top Destination -->
+                <div class="absolute top-10 left-0 md:-left-8 glass-card p-3 rounded-2xl shadow-soft animate-float max-w-[200px] z-20">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">Top Package</p>
+                            <p class="text-sm font-bold text-brand-dark dark:text-white">Makkah Ziyarat</p>
+                        </div>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                    </div>
+                    <div class="h-20 w-full rounded-lg overflow-hidden bg-gray-200 relative">
+                        <img src="assets/images/top-package.jpg" 
+                             alt="Makkah Holy Mosque" 
+                             class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                    </div>
+                </div>
+
+                <!-- Floating Card 2: Activities / Fleet -->
+                <div class="absolute bottom-20 right-0 md:-right-4 glass-card p-4 rounded-2xl shadow-soft animate-float-delay min-w-[180px] z-20">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-sm font-bold text-gray-700 dark:text-white">Fleet Status</span>
+                        <i class="fas fa-chart-line text-gray-400 dark:text-gray-500"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-white/10 overflow-hidden border border-gray-200 dark:border-white/10">
+                                <img src="assets/images/fleet-1.jpg" 
+                                     alt="Hyundai Staria" 
+                                     class="w-full h-full object-cover"
+                                     onerror="this.src='https://placehold.co/100x100?text=Car'">
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-brand-dark dark:text-white">Staria</p>
+                                <p class="text-[10px] text-green-600 dark:text-green-400 font-medium flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+                                </p>
+                            </div>
+                            <span class="ml-auto text-xs font-bold bg-gray-100 dark:bg-white/10 dark:text-white px-2 py-1 rounded-md">12</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-white/10 overflow-hidden border border-gray-200 dark:border-white/10">
+                                <img src="assets/images/fleet-2.jpg" 
+                                     alt="GMC Yukon" 
+                                     class="w-full h-full object-cover"
+                                     onerror="this.src='https://placehold.co/100x100?text=Car'">
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-brand-dark dark:text-white">Yukon</p>
+                                <p class="text-[10px] text-green-600 dark:text-green-400 font-medium flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available
+                                </p>
+                            </div>
+                            <span class="ml-auto text-xs font-bold bg-gray-100 dark:bg-white/10 dark:text-white px-2 py-1 rounded-md">08</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom Floating Banner -->
+        <!-- CORRECTED ALIGNMENT: Use left-0 right-0 mx-auto for robust centering -->
+        <div class="absolute bottom-6 left-0 right-0 mx-auto w-full max-w-5xl px-4 hidden lg:block z-20 animate-on-scroll" style="transition-delay: 600ms;">
+            <div class="glass-card rounded-2xl p-4 shadow-soft flex justify-between items-center">
+                <p class="text-sm text-gray-600 dark:text-gray-300 pl-2">
+                    Join thousands of pilgrims discovering <span class="font-bold text-brand-dark dark:text-white">unique experiences</span> across the Kingdom.
+                </p>
+                <div class="flex gap-3">
+                    <button class="px-4 py-2 rounded-lg border border-gray-200 dark:border-white/20 text-sm font-semibold hover:bg-gray-50 dark:hover:bg-white/5 dark:text-white transition-colors flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-green-500"></i> WhatsApp
+                    </button>
+                    <button class="px-4 py-2 rounded-lg bg-brand-dark dark:bg-white dark:text-brand-dark text-white text-sm font-semibold hover:bg-black dark:hover:bg-gray-200 transition-colors flex items-center gap-2">
+                        <i class="fas fa-headset"></i> Contact Expert
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="relative py-24 px-4 md:px-8 bg-white dark:bg-brand-dark transition-colors duration-300 overflow-hidden">
+        
+        <!-- New: Glow Effect Top Right -->
+        <div class="glow-red top-[-100px] right-[-100px] w-[600px] h-[600px]"></div>
+        <!-- New: Glow Effect Bottom Left -->
+        <div class="glow-red bottom-[-50px] left-[-200px] w-[700px] h-[700px] opacity-70"></div>
+
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start relative z-10">
+            
+            <!-- Left Column: Content -->
+            <div class="space-y-8 lg:sticky lg:top-32">
+                <div class="space-y-4 animate-on-scroll">
+                    <span class="text-sm font-bold text-gray-400 tracking-wider uppercase">Travel Experiences</span>
+                    <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-brand-dark dark:text-white leading-tight">
+                        Curated journeys for <br>
+                        <span class="text-brand-red">every traveler.</span>
+                    </h2>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6 text-sm font-medium text-gray-500 dark:text-gray-400 animate-on-scroll" style="transition-delay: 100ms;">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-globe text-brand-red"></i> Nationwide Reach
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-certificate text-brand-red"></i> Verified Fleet
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-heart text-brand-red"></i> Local Expertise
+                    </div>
+                </div>
+
+                <div class="space-y-4 animate-on-scroll" style="transition-delay: 200ms;">
+                    <h3 class="text-lg font-bold text-brand-dark dark:text-white">Personalized adventures kingdom-wide</h3>
+                    <p class="text-gray-500 dark:text-gray-400 leading-relaxed max-w-md">
+                        Whether you seek spiritual immersion in the Holy Cities, seamless city-to-city transfers, or specific vehicle arrangements for your family, our expert team crafts unforgettable experiences tailored to your desires.
+                    </p>
+                </div>
+
+                <!-- UPDATED BUTTON: "Start Your Journey" + Modal Hook -->
+                <button onclick="openModal('Start Your Journey')" class="bg-brand-dark dark:bg-white dark:text-brand-dark text-white font-semibold py-4 px-8 rounded-full shadow-lg hover:bg-black dark:hover:bg-gray-200 transition-all duration-300 w-full sm:w-auto flex justify-between items-center group animate-on-scroll" style="transition-delay: 300ms;">
+                    <span>Start Your Journey</span>
+                    <div class="w-2 h-2 rounded-full bg-white dark:bg-brand-dark ml-4 group-hover:scale-150 transition-transform"></div>
+                </button>
+            </div>
+
+            <!-- Right Column: Bento Grid -->
+            <div class="grid grid-cols-2 gap-4 auto-rows-[190px]">
+                <!-- Card 1 -->
+                <div class="group relative rounded-3xl overflow-hidden row-span-2 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500 border border-transparent dark:border-white/10 animate-on-scroll" style="transition-delay: 200ms;">
+                    <img src="assets/images/ziyarat-umrah.jpg" alt="Makkah Ziyarat" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute top-4 right-4 glass-badge px-3 py-1 rounded-full text-xs font-medium text-white">Spiritual</div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3"><i class="fas fa-kaaba text-sm"></i></div>
+                        <h3 class="font-display font-bold text-xl mb-1">Ziyarat & Umrah</h3>
+                        <p class="text-xs text-gray-300 line-clamp-2">All-inclusive tours to Makkah & Madinah.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="group relative rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500 border border-transparent dark:border-white/10 animate-on-scroll" style="transition-delay: 300ms;">
+                    <img src="assets/images/city-transfer.jpg" alt="City Transfers" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 right-4 glass-badge px-3 py-1 rounded-full text-xs font-medium text-white">Intercity</div>
+                    <div class="absolute bottom-6 left-6 text-white"><h3 class="font-display font-bold text-xl">City Transfer</h3></div>
+                </div>
+                <!-- Card 3 -->
+                <div class="group relative rounded-3xl overflow-hidden row-span-2 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500 border border-transparent dark:border-white/10 animate-on-scroll" style="transition-delay: 400ms;">
+                    <img src="assets/images/hourly-chauffeur.jpg" alt="Hourly Chauffeur" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute top-4 right-4 glass-badge px-3 py-1 rounded-full text-xs font-medium text-white">Premium</div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3"><i class="fas fa-clock text-sm"></i></div>
+                        <h3 class="font-display font-bold text-xl mb-1">Hourly Chauffeur</h3>
+                        <p class="text-xs text-gray-300 line-clamp-2">Luxury interiors for your comfort.</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="group relative rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500 border border-transparent dark:border-white/10 animate-on-scroll" style="transition-delay: 500ms;">
+                    <img src="assets/images/custom-trip.jpg" alt="Custom Itinerary" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 right-4 glass-badge px-3 py-1 rounded-full text-xs font-medium text-white">Custom</div>
+                    <div class="absolute bottom-6 left-6 text-white"><h3 class="font-display font-bold text-xl">Custom Trips</h3></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLEET SECTION (Fixed: Left-Aligned No Overlap) -->
+    <section id="fleet" class="relative py-24 bg-[#F8F9FB] dark:bg-[#121212] overflow-hidden transition-colors duration-300" onmouseenter="stopAutoScroll()" onmouseleave="resumeAutoScroll()">
+        
+        <!-- New: Glow Effect Center Left -->
+        <div class="glow-red top-[20%] left-[-300px] w-[900px] h-[900px] opacity-40"></div>
+
+        <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Left: Info (Synchronized) -->
+                <div class="space-y-8 z-10 relative">
+                    <div class="space-y-2 animate-on-scroll">
+                        <span class="text-sm font-bold text-gray-400 tracking-wider uppercase">Our Fleet</span>
+                        <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-brand-dark dark:text-white leading-tight">
+                            Experience the <br>
+                            <span class="text-brand-red">Art of Motion.</span>
+                        </h2>
+                    </div>
+
+                    <!-- Dynamic Info Container -->
+                    <div class="min-h-[220px] animate-on-scroll" style="transition-delay: 200ms;">
+                        <!-- Vehicle 1 Info -->
+                        <div id="info-0" class="fleet-info active space-y-6">
+                            <div class="space-y-4">
+                                <h3 class="text-3xl font-bold text-brand-dark dark:text-white">Hyundai Staria</h3>
+                                <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                                    Chosen for its exceptional highway performance, fuel efficiency, and superior passenger comfort, ensuring a smooth journey on all long-distance routes.
+                                </p>
+                            </div>
+                            <div class="flex gap-6 border-t border-gray-200 dark:border-white/10 pt-6">
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Passengers</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">7 Guests</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Luggage</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">5 Bags</span>
+                                </div>
+                            </div>
+                            <button onclick="openModal('Book Staria')" class="bg-brand-dark dark:bg-white dark:text-brand-dark text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-black dark:hover:bg-gray-200 transition-all duration-300 mt-4 group">
+                                <span>Book This Vehicle</span>
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+
+                        <!-- Vehicle 2 Info -->
+                        <div id="info-1" class="fleet-info space-y-6">
+                            <div class="space-y-4">
+                                <h3 class="text-3xl font-bold text-brand-dark dark:text-white">GMC Yukon</h3>
+                                <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                                    Combining luxury with rugged capability, the Yukon offers a premium experience with ample space. Perfect for executive travel or family trips.
+                                </p>
+                            </div>
+                            <div class="flex gap-6 border-t border-gray-200 dark:border-white/10 pt-6">
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Passengers</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">7 Guests</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Luggage</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">4 Bags</span>
+                                </div>
+                            </div>
+                            <button onclick="openModal('Book Yukon')" class="bg-brand-dark dark:bg-white dark:text-brand-dark text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-black dark:hover:bg-gray-200 transition-all duration-300 mt-4 group">
+                                <span>Book This Vehicle</span>
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+
+                        <!-- Vehicle 3 Info -->
+                        <div id="info-2" class="fleet-info space-y-6">
+                            <div class="space-y-4">
+                                <h3 class="text-3xl font-bold text-brand-dark dark:text-white">Chevy Suburban</h3>
+                                <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                                    The definitive large SUV, providing maximum interior space for larger groups and their belongings without compromising on comfort.
+                                </p>
+                            </div>
+                            <div class="flex gap-6 border-t border-gray-200 dark:border-white/10 pt-6">
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Passengers</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">8 Guests</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Luggage</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">6 Bags</span>
+                                </div>
+                            </div>
+                            <button onclick="openModal('Book Suburban')" class="bg-brand-dark dark:bg-white dark:text-brand-dark text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-black dark:hover:bg-gray-200 transition-all duration-300 mt-4 group">
+                                <span>Book This Vehicle</span>
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+
+                        <!-- Vehicle 4 Info -->
+                        <div id="info-3" class="fleet-info space-y-6">
+                            <div class="space-y-4">
+                                <h3 class="text-3xl font-bold text-brand-dark dark:text-white">Toyota HiAce</h3>
+                                <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                                    The global standard for group transport, the HiAce is the go-to choice for reliability and efficiency, comfortably accommodating more passengers.
+                                </p>
+                            </div>
+                            <div class="flex gap-6 border-t border-gray-200 dark:border-white/10 pt-6">
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Passengers</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">12 Guests</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Luggage</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">8 Bags</span>
+                                </div>
+                            </div>
+                            <button onclick="openModal('Book HiAce')" class="bg-brand-dark dark:bg-white dark:text-brand-dark text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-black dark:hover:bg-gray-200 transition-all duration-300 mt-4 group">
+                                <span>Book This Vehicle</span>
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+
+                        <!-- Vehicle 5 Info (Added Starex) -->
+                        <div id="info-4" class="fleet-info space-y-6">
+                            <div class="space-y-4">
+                                <h3 class="text-3xl font-bold text-brand-dark dark:text-white">Hyundai Starex</h3>
+                                <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                                    The versatile Starex offers a comfortable and practical solution for group travel. A solid choice for families and tour groups alike.
+                                </p>
+                            </div>
+                            <div class="flex gap-6 border-t border-gray-200 dark:border-white/10 pt-6">
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Passengers</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">7 Guests</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Luggage</span>
+                                    <span class="text-lg font-bold text-brand-dark dark:text-white">4 Bags</span>
+                                </div>
+                            </div>
+                            <button onclick="openModal('Book Starex')" class="bg-brand-dark dark:bg-white dark:text-brand-dark text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-black dark:hover:bg-gray-200 transition-all duration-300 mt-4 group">
+                                <span>Book This Vehicle</span>
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Carousel (Visuals) -->
+                <!-- Removed 'overflow-visible' to fix the bleed issue. Using a mask container. -->
+                <div class="relative w-full overflow-hidden rounded-l-3xl group animate-on-scroll" style="transition-delay: 300ms;"> 
+                    
+                    <!-- Swiper -->
+                    <div class="swiper fleet-swiper w-full !pb-12 !pl-2">
+                        <div class="swiper-wrapper">
+                            <!-- Slide 1 -->
+                            <div class="swiper-slide cursor-pointer">
+                                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl transition-transform duration-500 hover:scale-[1.02] border border-transparent dark:border-white/10">
+                                    <img src="assets/images/fleet-1.jpg" alt="Hyundai Staria" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                </div>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="swiper-slide cursor-pointer">
+                                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl transition-transform duration-500 hover:scale-[1.02] border border-transparent dark:border-white/10">
+                                    <img src="assets/images/fleet-2.jpg" alt="GMC Yukon" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                </div>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="swiper-slide cursor-pointer">
+                                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl transition-transform duration-500 hover:scale-[1.02] border border-transparent dark:border-white/10">
+                                    <img src="assets/images/fleet-3.jpg" alt="Chevy Suburban" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                </div>
+                            </div>
+                            <!-- Slide 4 -->
+                            <div class="swiper-slide cursor-pointer">
+                                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl transition-transform duration-500 hover:scale-[1.02] border border-transparent dark:border-white/10">
+                                    <img src="assets/images/fleet-4.jpg" alt="Toyota HiAce" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                </div>
+                            </div>
+                            <!-- Slide 5 (Added Starex) -->
+                            <div class="swiper-slide cursor-pointer">
+                                <div class="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl transition-transform duration-500 hover:scale-[1.02] border border-transparent dark:border-white/10">
+                                    <img src="assets/images/fleet-5.jpg" alt="Hyundai Starex" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pagination (Dots) - Automatically counts slides -->
+                        <div class="swiper-pagination !bottom-0"></div>
+                    </div>
+
+                    <!-- Navigation Buttons Removed as requested -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES & STORY SECTION (Inspo Adaptation) -->
+    <section id="features" class="relative py-24 bg-white dark:bg-brand-dark transition-colors duration-300 overflow-hidden">
+        
+        <!-- New: Glow Effect Top Right -->
+        <div class="glow-red top-0 right-0 w-[500px] h-[500px]"></div>
+        <!-- New: Glow Effect Bottom Left -->
+        <div class="glow-red bottom-0 left-[20%] w-[600px] h-[600px]"></div>
+        <!-- New: Center Text Glow (UPDATED VISIBILITY) -->
+        <div class="glow-red top-10 left-1/2 -translate-x-1/2 w-[600px] h-[400px] opacity-100 dark:opacity-60"></div>
+
+        <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-sm font-bold text-gray-400 tracking-wider uppercase animate-on-scroll">The Amfics Standard</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-brand-dark dark:text-white leading-tight animate-on-scroll" style="transition-delay: 100ms;">
+                    Excellence built for <br>
+                    <span class="text-brand-red">modern journeys.</span>
+                </h2>
+                <p class="text-gray-500 dark:text-gray-400 text-lg animate-on-scroll" style="transition-delay: 200ms;">
+                    From the moment you book to your final destination, every detail is designed to keep you inspired, comfortable, and in control.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8">
+                
+                <!-- Left Column: Feature Grid (2x2) -->
+                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6 animate-on-scroll" style="transition-delay: 300ms;">
+                    
+                    <!-- Feature 1 -->
+                    <div class="glass-card p-8 rounded-3xl hover:shadow-lg transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-white dark:bg-white/10 rounded-2xl flex items-center justify-center text-brand-red shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-clock text-xl"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-brand-dark dark:text-white mb-3">Punctuality Guarantee</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            Time is luxury. We track flights and traffic in real-time to ensure we are always there before you need us.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="glass-card p-8 rounded-3xl hover:shadow-lg transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-white dark:bg-white/10 rounded-2xl flex items-center justify-center text-brand-red shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-user-tie text-xl"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-brand-dark dark:text-white mb-3">Expert Chauffeurs</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            Professional, multi-lingual, and trained in discreet service. Your privacy and comfort are their priority.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="glass-card p-8 rounded-3xl hover:shadow-lg transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-white dark:bg-white/10 rounded-2xl flex items-center justify-center text-brand-red shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                            <!-- UPDATED: Changed from fa-sparkles (Pro) to fa-gem (Free) -->
+                            <i class="fas fa-gem text-xl"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-brand-dark dark:text-white mb-3">Immaculate Fleet</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            Showroom-condition vehicles, sanitized daily. We maintain the highest standards of hygiene and mechanics.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="glass-card p-8 rounded-3xl hover:shadow-lg transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-white dark:bg-white/10 rounded-2xl flex items-center justify-center text-brand-red shadow-sm mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-headset text-xl"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-brand-dark dark:text-white mb-3">24/7 Concierge</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            A dedicated support team monitoring your journey around the clock. We are always just a message away.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: The "Story/Highlight" Card -->
+                <div class="lg:col-span-5 animate-on-scroll" style="transition-delay: 400ms;">
+                    <div class="bg-brand-dark text-white h-full rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between shadow-2xl">
+                        
+                        <!-- Background Pattern -->
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-red/20 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium text-white/90 mb-6 border border-white/10">
+                                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                                <span>Legacy of Trust</span>
+                            </div>
+
+                            <h3 class="font-display font-bold text-3xl mb-4 leading-tight">
+                                Built on a foundation of excellence.
+                            </h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-8">
+                                At Amfics, we redefine luxury travel across Saudi Arabia. Extending from the Amfics brand's established success, we are dedicated to providing a seamless, memorable experience that sets a new standard in chauffeured services.
+                            </p>
+
+                            <!-- Inner Cards (Stats) -->
+                            <div class="space-y-3">
+                                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 flex items-center justify-between border border-white/5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                                            <i class="fas fa-road text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-400">Kilometers Driven</p>
+                                            <p class="font-bold text-sm">80,000+ km</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-brand-red font-bold">+12%</span>
+                                </div>
+
+                                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 flex items-center justify-between border border-white/5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                                            <i class="fas fa-users text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-400">Happy Travelers</p>
+                                            <p class="font-bold text-sm">50,000+ Guests</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-brand-red font-bold">4.9/5</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Action -->
+                        <div class="relative z-10 mt-8 flex items-center justify-between pt-6 border-t border-white/10">
+                            <div class="flex -space-x-2">
+                                <img class="w-8 h-8 rounded-full border-2 border-brand-dark" src="https://i.pravatar.cc/100?img=1" alt="User">
+                                <img class="w-8 h-8 rounded-full border-2 border-brand-dark" src="https://i.pravatar.cc/100?img=2" alt="User">
+                                <img class="w-8 h-8 rounded-full border-2 border-brand-dark" src="https://i.pravatar.cc/100?img=3" alt="User">
+                            </div>
+                            <button onclick="openModal('General Inquiry')" class="bg-white text-brand-dark px-6 py-3 rounded-xl text-sm font-bold hover:bg-gray-100 transition-colors flex items-center gap-2">
+                                Contact Us <i class="fas fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <!-- TESTIMONIALS SECTION (New) -->
+    <section id="testimonials" class="relative py-24 px-4 md:px-8 bg-[#F8F9FB] dark:bg-[#121212] transition-colors duration-300 overflow-hidden">
+        
+        <!-- Decorative Background Elements -->
+        <div class="glow-red top-[20%] right-[-200px] w-[700px] h-[700px] opacity-30"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-on-scroll">
+                <span class="text-sm font-bold text-gray-400 tracking-wider uppercase">Traveler Stories</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-brand-dark dark:text-white leading-tight">
+                    Stories from our <br>
+                    <span class="text-brand-red">community</span>
+                </h2>
+                <p class="text-gray-500 dark:text-gray-400 text-lg">
+                    Real experiences from travelers who discovered unforgettable moments with Amfics.
+                </p>
+            </div>
+
+            <!-- Testimonials Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Card 1 -->
+                <div class="bg-white dark:bg-white/5 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 animate-on-scroll border border-gray-100 dark:border-white/10" style="transition-delay: 100ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <img src="https://i.pravatar.cc/100?img=32" alt="Sarah" class="w-12 h-12 rounded-full object-cover border-2 border-gray-100 dark:border-white/10">
+                            <div>
+                                <h4 class="font-bold text-brand-dark dark:text-white text-sm">Sarah Mitchell</h4>
+                                <p class="text-xs text-gray-400">Solo Traveler</p>
+                            </div>
+                        </div>
+                        <div class="flex text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">
+                        "The Umrah package was absolutely breathtaking. Every detail was thoughtfully planned, and the guides were incredibly knowledgeable. I felt safe and inspired throughout the journey."
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-400 font-medium">
+                        <i class="fas fa-map-marker-alt"></i> Makkah, Saudi Arabia
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white dark:bg-white/5 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 animate-on-scroll border border-gray-100 dark:border-white/10" style="transition-delay: 200ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <img src="https://i.pravatar.cc/100?img=11" alt="Marcus" class="w-12 h-12 rounded-full object-cover border-2 border-gray-100 dark:border-white/10">
+                            <div>
+                                <h4 class="font-bold text-brand-dark dark:text-white text-sm">Marcus Chen</h4>
+                                <p class="text-xs text-gray-400">Business Executive</p>
+                            </div>
+                        </div>
+                        <div class="flex text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">
+                        "Amfics exceeded all expectations. The vehicle was pristine, the chauffeur professional, and the journey seamless. This trip changed my perspective on business travel in the region."
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-400 font-medium">
+                        <i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white dark:bg-white/5 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 animate-on-scroll border border-gray-100 dark:border-white/10" style="transition-delay: 300ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <img src="https://i.pravatar.cc/100?img=5" alt="Emma" class="w-12 h-12 rounded-full object-cover border-2 border-gray-100 dark:border-white/10">
+                            <div>
+                                <h4 class="font-bold text-brand-dark dark:text-white text-sm">Emma Rodriguez</h4>
+                                <p class="text-xs text-gray-400">Culture Enthusiast</p>
+                            </div>
+                        </div>
+                        <div class="flex text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">
+                        "The cultural immersion in Madinah was phenomenal. From traditional insights to site visits, every moment felt authentic and meaningful. Truly a once-in-a-lifetime experience."
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-400 font-medium">
+                        <i class="fas fa-map-marker-alt"></i> Madinah, Saudi Arabia
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white dark:bg-white/5 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 animate-on-scroll border border-gray-100 dark:border-white/10" style="transition-delay: 400ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <img src="https://i.pravatar.cc/100?img=68" alt="James" class="w-12 h-12 rounded-full object-cover border-2 border-gray-100 dark:border-white/10">
+                            <div>
+                                <h4 class="font-bold text-brand-dark dark:text-white text-sm">James Thompson</h4>
+                                <p class="text-xs text-gray-400">Photographer</p>
+                            </div>
+                        </div>
+                        <div class="flex text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">
+                        "The city transfer was extraordinary. We saw the beautiful landscapes in their natural habitat, and the comfort of the Staria was truly inspiring. The driver's knowledge was contagious."
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-400 font-medium">
+                        <i class="fas fa-map-marker-alt"></i> Jeddah, Saudi Arabia
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-white dark:bg-white/5 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 animate-on-scroll border border-gray-100 dark:border-white/10" style="transition-delay: 500ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <img src="https://i.pravatar.cc/100?img=44" alt="Olivia" class="w-12 h-12 rounded-full object-cover border-2 border-gray-100 dark:border-white/10">
+                            <div>
+                                <h4 class="font-bold text-brand-dark dark:text-white text-sm">Olivia Park</h4>
+                                <p class="text-xs text-gray-400">Family Traveler</p>
+                            </div>
+                        </div>
+                        <div class="flex text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">
+                        "Traveling with kids can be challenging, but Amfics made it seamless. Every activity was family-friendly. Our children still talk about the experience months later!"
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-400 font-medium">
+                        <i class="fas fa-map-marker-alt"></i> Al Ula, Saudi Arabia
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-white dark:bg-white/5 p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all duration-300 animate-on-scroll border border-gray-100 dark:border-white/10" style="transition-delay: 600ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <img src="https://i.pravatar.cc/100?img=59" alt="Daniel" class="w-12 h-12 rounded-full object-cover border-2 border-gray-100 dark:border-white/10">
+                            <div>
+                                <h4 class="font-bold text-brand-dark dark:text-white text-sm">Daniel Foster</h4>
+                                <p class="text-xs text-gray-400">Digital Nomad</p>
+                            </div>
+                        </div>
+                        <div class="flex text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">
+                        "Perfect blend of work and adventure. The WiFi in the car was excellent, and the weekend excursions helped me disconnect and recharge. Highly recommend for remote workers!"
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-400 font-medium">
+                        <i class="fas fa-map-marker-alt"></i> Dammam, Saudi Arabia
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom CTA Button (Updated Text & Functionality) -->
+            <div class="text-center mt-12 animate-on-scroll" style="transition-delay: 700ms;">
+                <button onclick="openModal('Write Your Story')" class="bg-brand-dark dark:bg-white dark:text-brand-dark text-white px-8 py-4 rounded-full text-sm font-bold hover:bg-black dark:hover:bg-gray-200 transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2 group">
+                    Start Your Own Story
+                    <i class="fas fa-pen-fancy text-xs group-hover:rotate-12 transition-transform"></i>
+                </button>
+            </div>
+
+        </div>
+    </section>
+    
+    <!-- FAQ SECTION -->
+    <section id="faq" class="relative py-24 px-4 md:px-8 bg-white dark:bg-brand-dark transition-colors duration-300 overflow-hidden">
+        <!-- Glow Effect -->
+        <div class="glow-red bottom-0 right-0 w-[600px] h-[600px] opacity-50"></div>
+
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 relative z-10">
+             <!-- Left Column: FAQ Accordion -->
+            <div class="lg:col-span-7 space-y-8 animate-on-scroll">
+                 <div>
+                    <span class="text-sm font-bold text-gray-400 tracking-wider uppercase">FAQ</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-dark dark:text-white leading-tight mt-2">
+                        Common questions from <br> <span class="text-brand-red">our travelers</span>
+                    </h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-4">
+                         Everything you need to know about our premium services, booking process, and policies.
+                    </p>
+                 </div>
+
+                 <div class="space-y-2">
+                     
+                     <!-- Category: Booking & Process -->
+                     <h3 class="text-brand-red font-bold text-sm uppercase tracking-wider pt-4 pb-2">Booking & Process</h3>
+                     
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">How does the booking process work?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>It's simple. Click 'Plan Your Trip' to fill out a quick form. This will automatically open a WhatsApp chat with our team where we will confirm availability, finalize your price, and secure your booking instantly.</p>
+                         </div>
+                     </div>
+
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">How far in advance should I reserve my car?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>We recommend booking at least 24 hours in advance to guarantee your preferred vehicle model. However, we do our best to accommodate last-minute requests for immediate travel.</p>
+                         </div>
+                     </div>
+
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">Can I book a ride for someone else (guest/family)?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>Absolutely. Many of our clients book for family members performing Umrah or business guests. Just provide the passenger's contact details when booking, and we will handle the coordination seamlessly.</p>
+                         </div>
+                     </div>
+
+                     <!-- Category: The Experience -->
+                     <h3 class="text-brand-red font-bold text-sm uppercase tracking-wider pt-8 pb-2">The Experience</h3>
+
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">Do your chauffeurs speak English?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>Yes. We understand the importance of clear communication. Our chauffeurs are professional, courteous, and proficient in English to ensure a smooth journey for international travelers.</p>
+                         </div>
+                     </div>
+
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">Do you offer airport Meet & Greet services?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>Yes. For airport arrivals, your chauffeur will wait for you in the arrival hall with a name board, assist with your luggage, and escort you directly to your waiting vehicle.</p>
+                         </div>
+                     </div>
+
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">Can we stop for breaks during intercity transfers?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>This is your private journey. You are welcome to ask your chauffeur to stop for prayers, restrooms, or refreshments at any time during the trip.</p>
+                         </div>
+                     </div>
+
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">Is smoking allowed in the vehicles?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>To maintain our "Immaculate Fleet" standards and ensure the comfort of all guests, Amfics maintains a strict non-smoking policy inside all vehicles.</p>
+                         </div>
+                     </div>
+
+                     <!-- Category: Payment & Policies -->
+                     <h3 class="text-brand-red font-bold text-sm uppercase tracking-wider pt-8 pb-2">Payment & Policies</h3>
+
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">How and when do I pay?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>Payment terms are flexible. We typically accept bank transfers or secure payment links finalized via WhatsApp. Cash payments to the driver can also be arranged upon prior agreement.</p>
+                         </div>
+                     </div>
+
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">What happens if my flight is delayed?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>We monitor your flight status in real-time. We provide a complimentary waiting time of up to 60 minutes after your actual landing time, ensuring your driver is there when you walk out.</p>
+                         </div>
+                     </div>
+
+                     <div class="faq-item">
+                         <div class="faq-button" onclick="toggleFaq(this)">
+                             <span class="text-brand-dark dark:text-white">Is there a cancellation fee?</span>
+                             <i class="fas fa-arrow-right text-brand-dark dark:text-white transform -rotate-45 transition-transform duration-300"></i>
+                         </div>
+                         <div class="faq-answer">
+                             <p>We offer free cancellation up to 24 hours before your scheduled pickup. Cancellations made within 24 hours may be subject to a fee to compensate the assigned driver.</p>
+                         </div>
+                     </div>
+
+                 </div>
+            </div>
+
+            <!-- Right Column: Contact Card -->
+            <div class="lg:col-span-5 animate-on-scroll" style="transition-delay: 200ms;">
+                 <div class="relative h-full min-h-[400px] rounded-3xl overflow-hidden">
+                     <img src="assets/images/customer-support.jpg" alt="Customer Support" class="absolute inset-0 w-full h-full object-cover">
+                     <div class="absolute inset-0 bg-black/40"></div>
+                     <div class="absolute bottom-0 left-0 w-full p-8">
+                         <div class="glass-card bg-black/60 backdrop-blur-md border-white/10 p-6 rounded-2xl">
+                             <h4 class="text-white font-bold text-xl mb-2">Still have questions?</h4>
+                             <p class="text-gray-300 text-sm mb-6">Can't find the answer you're looking for? Please chat to our friendly team.</p>
+                             <div class="flex gap-3">
+                                 <button onclick="openModal('General Inquiry')" class="bg-white text-brand-dark px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-100 transition-colors">
+                                     Get in touch
+                                 </button>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-white dark:bg-black border-t border-gray-100 dark:border-white/10 pt-20 pb-10 relative overflow-hidden transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-1 space-y-6">
+                    <div class="flex items-center gap-2">
+                        <!-- Logo Removed, Text Only -->
+                        <span class="font-display font-bold text-2xl tracking-tight text-brand-dark dark:text-white uppercase">AMFICS</span>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                        Redefining luxury travel across the Kingdom with reliability, comfort, and style.
+                    </p>
+                    <div class="flex gap-4">
+                        <!-- Social Links -->
+                        <a href="https://www.instagram.com/amfics/" target="_blank" class="w-10 h-10 rounded-full bg-gray-50 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-white hover:bg-brand-red hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/amfics/" target="_blank" class="w-10 h-10 rounded-full bg-gray-50 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-white hover:bg-brand-red hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/message/KZZXMW2ZGHTCD1" target="_blank" class="w-10 h-10 rounded-full bg-gray-50 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-white hover:bg-green-500 hover:text-white transition-all"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold text-brand-dark dark:text-white mb-6">Company</h4>
+                    <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+                        <li><a href="#home" class="hover:text-brand-red transition-colors">Home</a></li>
+                        <li><a href="#features" class="hover:text-brand-red transition-colors">About Us</a></li>
+                        <li><a href="#fleet" class="hover:text-brand-red transition-colors">Our Fleet</a></li>
+                        <li><a href="#testimonials" class="hover:text-brand-red transition-colors">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-bold text-brand-dark dark:text-white mb-6">Services</h4>
+                    <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+                        <!-- UPDATED: Use javascript:void(0) to prevent page jump/reload -->
+                        <li><a href="javascript:void(0)" onclick="openModal('Ziyarat');" class="hover:text-brand-red transition-colors">Ziyarat & Umrah</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('City Transfer');" class="hover:text-brand-red transition-colors">City Transfers</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('Hourly');" class="hover:text-brand-red transition-colors">Hourly Chauffeur</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('Custom');" class="hover:text-brand-red transition-colors">Custom Itinerary</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold text-brand-dark dark:text-white mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-brand-red"></i>
+                            <span>Jeddah, Saudi Arabia</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-brand-red"></i>
+                            <!-- Updated email to match rebrand, though keeping it functional -->
+                            <a href="mailto:support@amfics.co" class="hover:text-brand-red transition-colors">support@amfics.co</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-brand-red"></i>
+                            <a href="tel:+966531581434" class="hover:text-brand-red transition-colors">+966 53 158 1434</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-100 dark:border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                <p>&copy; 2025 Amfics. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <button onclick="openLegalModal('privacy')" class="hover:text-brand-red transition-colors">Privacy Policy</button>
+                    <button onclick="openLegalModal('terms')" class="hover:text-brand-red transition-colors">Terms of Service</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INQUIRY MODAL (Compact No-Scroll Version) -->
+    <div id="inquiryModal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <!-- Modal Content (Matched to Amfics Premium UI: White, Clean, Brand Colors) -->
+        <div class="modal-content relative bg-white dark:bg-[#1E1E1E] w-full max-w-[400px] rounded-2xl shadow-2xl z-10 overflow-hidden border border-gray-100 dark:border-white/10 transition-colors duration-300">
+            <!-- Decorative Header Line -->
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-brand-red"></div>
+            
+            <div class="p-6 pb-0">
+                <div class="flex justify-between items-center mb-1">
+                    <!-- Dynamic Title -->
+                    <h3 id="modalTitle" class="font-display font-bold text-xl text-brand-dark dark:text-white">Start Your Journey</h3>
+                    <button onclick="closeModal()" class="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 text-gray-400 hover:text-brand-dark dark:hover:text-white transition-colors">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                </div>
+
+                <p id="modalDesc" class="text-gray-500 dark:text-gray-400 text-xs mb-4 leading-relaxed">
+                    Share your details below. We'll redirect you to WhatsApp to finalize your request with our expert team.
+                </p>
+            </div>
+
+            <form id="whatsappForm" onsubmit="submitInquiry(event)" class="px-6 pb-6 space-y-3">
+                <input type="hidden" id="sourceButton" value="">
+                
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 ml-1">Full Name <span class="text-brand-red">*</span></label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                            <i class="far fa-user text-xs"></i>
+                        </div>
+                        <input type="text" id="name" required class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg pl-9 pr-3 py-2.5 text-sm text-brand-dark dark:text-white focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all placeholder-gray-400" placeholder="Enter your name">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 ml-1">Phone Number <span class="text-brand-red">*</span></label>
+                    <div class="flex gap-2">
+                        <!-- Country Code Dropdown -->
+                        <div class="relative w-1/3">
+                            <select id="country-code" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg pl-3 pr-6 py-2.5 text-sm text-brand-dark dark:text-white focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all appearance-none cursor-pointer">
+                                <!-- Options will be populated by JS -->
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-400">
+                                <i class="fas fa-chevron-down text-[10px]"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Phone Input -->
+                        <div class="relative w-2/3">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </div>
+                            <input type="tel" id="phone" required class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg pl-9 pr-3 py-2.5 text-sm text-brand-dark dark:text-white focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all placeholder-gray-400" placeholder="50 123 4567">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 ml-1">Email Address <span class="text-brand-red">*</span></label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                            <i class="far fa-envelope text-xs"></i>
+                        </div>
+                        <input type="email" id="email" required class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg pl-9 pr-3 py-2.5 text-sm text-brand-dark dark:text-white focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all placeholder-gray-400" placeholder="Enter your email">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 ml-1">Message (Optional)</label>
+                    <textarea id="message" rows="2" class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg px-3 py-2.5 text-sm text-brand-dark dark:text-white focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all placeholder-gray-400 resize-none" placeholder="Any specific requirements?"></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full bg-brand-dark dark:bg-white dark:text-brand-dark hover:bg-black dark:hover:bg-gray-200 text-white font-bold py-3 rounded-xl shadow-lg transition-all transform hover:scale-[1.01] flex justify-center items-center gap-2 mt-2 group text-sm">
+                    <span class="btn-text">Send via WhatsApp</span>
+                    <i class="fab fa-whatsapp text-base text-green-400 dark:text-green-600 group-hover:scale-110 transition-transform"></i>
+                </button>
+                
+                <p class="text-center text-[10px] text-gray-400 mt-1">
+                    By submitting, you agree to connect via WhatsApp.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- NEW: LEGAL MODALS -->
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeLegalModal('privacy')"></div>
+        <div class="modal-content relative bg-white dark:bg-[#1E1E1E] w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl shadow-2xl z-10 border border-gray-100 dark:border-white/10 transition-colors duration-300 p-8">
+            <div class="flex justify-between items-start mb-6">
+                <h3 class="font-display font-bold text-2xl text-brand-dark dark:text-white">Privacy Policy</h3>
+                <button onclick="closeLegalModal('privacy')" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="prose dark:prose-invert prose-sm max-w-none text-gray-600 dark:text-gray-300 space-y-4">
+                <p><strong>Last Updated: January 2025</strong></p>
+                <p>At Amfics, we value your privacy. This Privacy Policy outlines how we collect, use, and protect your information when you use our services.</p>
+                
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">1. Information We Collect</h4>
+                <p>We collect information you provide directly to us, such as your name, phone number, email address, and trip details when you inquire about or book our services.</p>
+
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">2. How We Use Your Information</h4>
+                <p>We use your information to facilitate your bookings, communicate with you regarding your trip, improve our services, and ensure a safe travel experience.</p>
+
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">3. Information Sharing</h4>
+                <p>We do not sell your personal data. We may share necessary details with our drivers or operational partners strictly for the purpose of fulfilling your service request.</p>
+
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">4. Security</h4>
+                <p>We implement appropriate security measures to protect your personal information from unauthorized access or disclosure.</p>
+
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">5. Contact Us</h4>
+                <p>If you have any questions about this policy, please contact us at support@amfics.co.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="termsModal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeLegalModal('terms')"></div>
+        <div class="modal-content relative bg-white dark:bg-[#1E1E1E] w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl shadow-2xl z-10 border border-gray-100 dark:border-white/10 transition-colors duration-300 p-8">
+            <div class="flex justify-between items-start mb-6">
+                <h3 class="font-display font-bold text-2xl text-brand-dark dark:text-white">Terms of Service</h3>
+                <button onclick="closeLegalModal('terms')" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="prose dark:prose-invert prose-sm max-w-none text-gray-600 dark:text-gray-300 space-y-4">
+                <p><strong>Last Updated: January 2025</strong></p>
+                <p>Welcome to Amfics. By booking our services, you agree to the following terms.</p>
+                
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">1. Booking & Payments</h4>
+                <p>Bookings are subject to availability. A deposit may be required to secure your reservation. Final payment terms will be agreed upon during the booking process.</p>
+
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">2. Cancellations</h4>
+                <p>Cancellations made 24 hours prior to the scheduled pickup time are eligible for a full refund. Cancellations made within 24 hours may incur a fee.</p>
+
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">3. Passenger Conduct</h4>
+                <p>Passengers are expected to treat drivers and vehicles with respect. Smoking and consumption of illegal substances are strictly prohibited in our vehicles.</p>
+
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">4. Liability</h4>
+                <p>Amfics is not liable for delays caused by force majeure events, traffic conditions, or unforeseen circumstances beyond our control.</p>
+
+                <h4 class="font-bold text-brand-dark dark:text-white mt-4">5. Modifications</h4>
+                <p>We reserve the right to modify these terms at any time. Continued use of our services constitutes acceptance of the new terms.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // FIX: Smooth Scroll for Navigation Links to prevent reloading
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#' || !targetId.startsWith('#')) return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault(); // Stop the page from reloading/jumping
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Toggle FAQ
+            window.toggleFaq = function(element) {
+                const answer = element.nextElementSibling;
+                const icon = element.querySelector('i');
+                const isOpening = !answer.style.maxHeight || answer.style.maxHeight === "0px";
+                
+                // Close others
+                const allAnswers = document.querySelectorAll('.faq-answer');
+                const allIcons = document.querySelectorAll('.faq-button i');
+                allAnswers.forEach(ans => ans.style.maxHeight = null);
+                allIcons.forEach(ic => ic.style.transform = 'rotate(-45deg)');
+
+                if (isOpening) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+
+            // Scroll Animation Logic
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Dark Mode Logic
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            // Check LocalStorage or System Preference
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+               if (localStorage.theme === 'dark') {
+                   html.classList.add('dark');
+               }
+            } else {
+                html.classList.remove('dark');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                if (html.classList.contains('dark')) {
+                    html.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    html.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
+            });
+
+            // Country Codes Data
+            const countryCodes = [
+                { name: "Afghanistan", code: "+93", flag: "🇦🇫" },
+                { name: "Albania", code: "+355", flag: "🇦🇱" },
+                { name: "Algeria", code: "+213", flag: "🇩🇿" },
+                { name: "Andorra", code: "+376", flag: "🇦🇩" },
+                { name: "Angola", code: "+244", flag: "🇦🇴" },
+                { name: "Argentina", code: "+54", flag: "🇦🇷" },
+                { name: "Armenia", code: "+374", flag: "🇦🇲" },
+                { name: "Australia", code: "+61", flag: "🇦🇺" },
+                { name: "Austria", code: "+43", flag: "🇦🇹" },
+                { name: "Azerbaijan", code: "+994", flag: "🇦🇿" },
+                { name: "Bahrain", code: "+973", flag: "🇧🇭" },
+                { name: "Bangladesh", code: "+880", flag: "🇧🇩" },
+                { name: "Belarus", code: "+375", flag: "🇧🇾" },
+                { name: "Belgium", code: "+32", flag: "🇧🇪" },
+                { name: "Belize", code: "+501", flag: "🇧🇿" },
+                { name: "Benin", code: "+229", flag: "🇧🇯" },
+                { name: "Bhutan", code: "+975", flag: "🇧🇹" },
+                { name: "Bolivia", code: "+591", flag: "🇧🇴" },
+                { name: "Bosnia and Herzegovina", code: "+387", flag: "🇧🇦" },
+                { name: "Botswana", code: "+267", flag: "🇧🇼" },
+                { name: "Brazil", code: "+55", flag: "🇧🇷" },
+                { name: "Brunei", code: "+673", flag: "🇧🇳" },
+                { name: "Bulgaria", code: "+359", flag: "🇧🇬" },
+                { name: "Burkina Faso", code: "+226", flag: "🇧🇫" },
+                { name: "Burundi", code: "+257", flag: "🇧🇮" },
+                { name: "Cambodia", code: "+855", flag: "🇰🇭" },
+                { name: "Cameroon", code: "+237", flag: "🇨🇲" },
+                { name: "Canada", code: "+1", flag: "🇨🇦" },
+                { name: "Cape Verde", code: "+238", flag: "🇨🇻" },
+                { name: "Central African Republic", code: "+236", flag: "🇨🇫" },
+                { name: "Chad", code: "+235", flag: "🇹🇩" },
+                { name: "Chile", code: "+56", flag: "🇨🇱" },
+                { name: "China", code: "+86", flag: "🇨🇳" },
+                { name: "Colombia", code: "+57", flag: "🇨🇴" },
+                { name: "Comoros", code: "+269", flag: "🇰🇲" },
+                { name: "Congo", code: "+242", flag: "🇨🇬" },
+                { name: "Costa Rica", code: "+506", flag: "🇨🇷" },
+                { name: "Croatia", code: "+385", flag: "🇭🇷" },
+                { name: "Cuba", code: "+53", flag: "🇨🇺" },
+                { name: "Cyprus", code: "+357", flag: "🇨🇾" },
+                { name: "Czech Republic", code: "+420", flag: "🇨🇿" },
+                { name: "Denmark", code: "+45", flag: "🇩🇰" },
+                { name: "Djibouti", code: "+253", flag: "🇩🇯" },
+                { name: "Dominica", code: "+1-767", flag: "🇩🇲" },
+                { name: "Dominican Republic", code: "+1-809", flag: "🇩🇴" },
+                { name: "East Timor", code: "+670", flag: "🇹🇱" },
+                { name: "Ecuador", code: "+593", flag: "🇪🇨" },
+                { name: "Egypt", code: "+20", flag: "🇪🇬" },
+                { name: "El Salvador", code: "+503", flag: "🇸🇻" },
+                { name: "Equatorial Guinea", code: "+240", flag: "🇬🇶" },
+                { name: "Eritrea", code: "+291", flag: "🇪🇷" },
+                { name: "Estonia", code: "+372", flag: "🇪🇪" },
+                { name: "Ethiopia", code: "+251", flag: "🇪🇹" },
+                { name: "Fiji", code: "+679", flag: "🇫🇯" },
+                { name: "Finland", code: "+358", flag: "🇫🇮" },
+                { name: "France", code: "+33", flag: "🇫🇷" },
+                { name: "Gabon", code: "+241", flag: "🇬🇦" },
+                { name: "Gambia", code: "+220", flag: "🇬🇲" },
+                { name: "Georgia", code: "+995", flag: "🇬🇪" },
+                { name: "Germany", code: "+49", flag: "🇩🇪" },
+                { name: "Ghana", code: "+233", flag: "🇬🇭" },
+                { name: "Greece", code: "+30", flag: "🇬🇷" },
+                { name: "Grenada", code: "+1-473", flag: "🇬🇩" },
+                { name: "Guatemala", code: "+502", flag: "🇬🇹" },
+                { name: "Guinea", code: "+224", flag: "🇬🇳" },
+                { name: "Guinea-Bissau", code: "+245", flag: "🇬🇼" },
+                { name: "Guyana", code: "+592", flag: "🇬🇾" },
+                { name: "Haiti", code: "+509", flag: "🇭🇹" },
+                { name: "Honduras", code: "+504", flag: "🇭🇳" },
+                { name: "Hungary", code: "+36", flag: "🇭🇺" },
+                { name: "Iceland", code: "+354", flag: "🇮🇸" },
+                { name: "India", code: "+91", flag: "🇮🇳" },
+                { name: "Indonesia", code: "+62", flag: "🇮🇩" },
+                { name: "Iran", code: "+98", flag: "🇮🇷" },
+                { name: "Iraq", code: "+964", flag: "🇮🇶" },
+                { name: "Ireland", code: "+353", flag: "🇮🇪" },
+                { name: "Israel", code: "+972", flag: "🇮🇱" },
+                { name: "Italy", code: "+39", flag: "🇮🇹" },
+                { name: "Jamaica", code: "+1-876", flag: "🇯🇲" },
+                { name: "Japan", code: "+81", flag: "🇯🇵" },
+                { name: "Jordan", code: "+962", flag: "🇯🇴" },
+                { name: "Kazakhstan", code: "+7", flag: "🇰🇿" },
+                { name: "Kenya", code: "+254", flag: "🇰🇪" },
+                { name: "Kiribati", code: "+686", flag: "🇰🇮" },
+                { name: "North Korea", code: "+850", flag: "🇰🇵" },
+                { name: "South Korea", code: "+82", flag: "🇰🇷" },
+                { name: "Kuwait", code: "+965", flag: "🇰🇼" },
+                { name: "Kyrgyzstan", code: "+996", flag: "🇰🇬" },
+                { name: "Laos", code: "+856", flag: "🇱🇦" },
+                { name: "Latvia", code: "+371", flag: "🇱🇻" },
+                { name: "Lebanon", code: "+961", flag: "🇱🇧" },
+                { name: "Lesotho", code: "+266", flag: "🇱🇸" },
+                { name: "Liberia", code: "+231", flag: "🇱🇷" },
+                { name: "Libya", code: "+218", flag: "🇱🇾" },
+                { name: "Liechtenstein", code: "+423", flag: "🇱🇮" },
+                { name: "Lithuania", code: "+370", flag: "🇱🇹" },
+                { name: "Luxembourg", code: "+352", flag: "🇱🇺" },
+                { name: "Macedonia", code: "+389", flag: "🇲🇰" },
+                { name: "Madagascar", code: "+261", flag: "🇲🇬" },
+                { name: "Malawi", code: "+265", flag: "🇲🇼" },
+                { name: "Malaysia", code: "+60", flag: "🇲🇾" },
+                { name: "Maldives", code: "+960", flag: "🇲🇻" },
+                { name: "Mali", code: "+223", flag: "🇲🇱" },
+                { name: "Malta", code: "+356", flag: "🇲🇹" },
+                { name: "Marshall Islands", code: "+692", flag: "🇲🇭" },
+                { name: "Mauritania", code: "+222", flag: "🇲🇷" },
+                { name: "Mauritius", code: "+230", flag: "🇲🇺" },
+                { name: "Mexico", code: "+52", flag: "🇲🇽" },
+                { name: "Micronesia", code: "+691", flag: "🇫🇲" },
+                { name: "Moldova", code: "+373", flag: "🇲🇩" },
+                { name: "Monaco", code: "+377", flag: "🇲🇨" },
+                { name: "Mongolia", code: "+976", flag: "🇲🇳" },
+                { name: "Montenegro", code: "+382", flag: "🇲🇪" },
+                { name: "Morocco", code: "+212", flag: "🇲🇦" },
+                { name: "Mozambique", code: "+258", flag: "🇲🇿" },
+                { name: "Myanmar", code: "+95", flag: "🇲🇲" },
+                { name: "Namibia", code: "+264", flag: "🇳🇦" },
+                { name: "Nauru", code: "+674", flag: "🇳🇷" },
+                { name: "Nepal", code: "+977", flag: "🇳🇵" },
+                { name: "Netherlands", code: "+31", flag: "🇳🇱" },
+                { name: "New Zealand", code: "+64", flag: "🇳🇿" },
+                { name: "Nicaragua", code: "+505", flag: "🇳🇮" },
+                { name: "Niger", code: "+227", flag: "🇳🇪" },
+                { name: "Nigeria", code: "+234", flag: "🇳🇬" },
+                { name: "Norway", code: "+47", flag: "🇳🇴" },
+                { name: "Oman", code: "+968", flag: "🇴🇲" },
+                { name: "Pakistan", code: "+92", flag: "🇵🇰" },
+                { name: "Palau", code: "+680", flag: "🇵🇼" },
+                { name: "Panama", code: "+507", flag: "🇵🇦" },
+                { name: "Papua New Guinea", code: "+675", flag: "🇵🇬" },
+                { name: "Paraguay", code: "+595", flag: "🇵🇾" },
+                { name: "Peru", code: "+51", flag: "🇵🇪" },
+                { name: "Philippines", code: "+63", flag: "🇵🇭" },
+                { name: "Poland", code: "+48", flag: "🇵🇱" },
+                { name: "Portugal", code: "+351", flag: "🇵🇹" },
+                { name: "Qatar", code: "+974", flag: "🇶🇦" },
+                { name: "Romania", code: "+40", flag: "🇷🇴" },
+                { name: "Russia", code: "+7", flag: "🇷🇺" },
+                { name: "Rwanda", code: "+250", flag: "🇷🇼" },
+                { name: "Saint Kitts and Nevis", code: "+1-869", flag: "🇰🇳" },
+                { name: "Saint Lucia", code: "+1-758", flag: "🇱🇨" },
+                { name: "Saint Vincent and the Grenadines", code: "+1-784", flag: "🇻🇨" },
+                { name: "Samoa", code: "+685", flag: "🇼🇸" },
+                { name: "San Marino", code: "+378", flag: "🇸🇲" },
+                { name: "Sao Tome and Principe", code: "+239", flag: "🇸🇹" },
+                { name: "Saudi Arabia", code: "+966", flag: "🇸🇦" },
+                { name: "Senegal", code: "+221", flag: "🇸🇳" },
+                { name: "Serbia", code: "+381", flag: "🇷🇸" },
+                { name: "Seychelles", code: "+248", flag: "🇸🇨" },
+                { name: "Sierra Leone", code: "+232", flag: "🇸🇱" },
+                { name: "Singapore", code: "+65", flag: "🇸🇬" },
+                { name: "Slovakia", code: "+421", flag: "🇸🇰" },
+                { name: "Slovenia", code: "+386", flag: "🇸🇮" },
+                { name: "Solomon Islands", code: "+677", flag: "🇸🇧" },
+                { name: "Somalia", code: "+252", flag: "🇸🇴" },
+                { name: "South Africa", code: "+27", flag: "🇿🇦" },
+                { name: "Spain", code: "+34", flag: "🇪🇸" },
+                { name: "Sri Lanka", code: "+94", flag: "🇱🇰" },
+                { name: "Sudan", code: "+249", flag: "🇸🇩" },
+                { name: "Suriname", code: "+597", flag: "🇸🇷" },
+                { name: "Swaziland", code: "+268", flag: "🇸🇿" },
+                { name: "Sweden", code: "+46", flag: "🇸🇪" },
+                { name: "Switzerland", code: "+41", flag: "🇨🇭" },
+                { name: "Syria", code: "+963", flag: "🇸🇾" },
+                { name: "Taiwan", code: "+886", flag: "🇹🇼" },
+                { name: "Tajikistan", code: "+992", flag: "🇹🇯" },
+                { name: "Tanzania", code: "+255", flag: "🇹🇿" },
+                { name: "Thailand", code: "+66", flag: "🇹🇭" },
+                { name: "Togo", code: "+228", flag: "🇹🇬" },
+                { name: "Tonga", code: "+676", flag: "🇹🇴" },
+                { name: "Trinidad and Tobago", code: "+1-868", flag: "🇹🇹" },
+                { name: "Tunisia", code: "+216", flag: "🇹🇳" },
+                { name: "Turkey", code: "+90", flag: "🇹🇷" },
+                { name: "Turkmenistan", code: "+993", flag: "🇹🇲" },
+                { name: "Tuvalu", code: "+688", flag: "🇹🇻" },
+                { name: "Uganda", code: "+256", flag: "🇺🇬" },
+                { name: "Ukraine", code: "+380", flag: "🇺🇦" },
+                { name: "United Arab Emirates", code: "+971", flag: "🇦🇪" },
+                { name: "United Kingdom", code: "+44", flag: "🇬🇧" },
+                { name: "United States", code: "+1", flag: "🇺🇸" },
+                { name: "Uruguay", code: "+598", flag: "🇺🇾" },
+                { name: "Uzbekistan", code: "+998", flag: "🇺🇿" },
+                { name: "Vanuatu", code: "+678", flag: "🇻🇺" },
+                { name: "Vatican City", code: "+379", flag: "🇻🇦" },
+                { name: "Venezuela", code: "+58", flag: "🇻🇪" },
+                { name: "Vietnam", code: "+84", flag: "🇻🇳" },
+                { name: "Yemen", code: "+967", flag: "🇾🇪" },
+                { name: "Zambia", code: "+260", flag: "🇿🇲" },
+                { name: "Zimbabwe", code: "+263", flag: "🇿🇼" }
+            ];
+
+            // Populate Country Codes
+            const countrySelect = document.getElementById('country-code');
+            if (countrySelect) {
+                // Sort by name
+                countryCodes.sort((a, b) => a.name.localeCompare(b.name));
+                
+                countryCodes.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.code;
+                    // UPDATED: Show code instead of name (e.g. 🇦🇫 +93)
+                    option.textContent = `${country.flag} ${country.code}`;
+                    countrySelect.appendChild(option);
+                });
+                
+                // Set Default to Saudi Arabia
+                countrySelect.value = "+966";
+            }
+
+            // Modal Logic
+            const modal = document.getElementById('inquiryModal');
+            const sourceInput = document.getElementById('sourceButton');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            // Check if submitBtn exists before querying span to avoid null errors if button id changes
+            const submitBtn = document.getElementById('submitBtn'); 
+            const submitBtnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+
+            // Make functions global
+            window.openModal = function(source) {
+                if(!modal || !sourceInput) return; // Guard clause
+                sourceInput.value = source;
+                modal.classList.add('active');
+                
+                // Dynamic Content Logic
+                if (modalTitle && modalDesc && submitBtnText) {
+                    if (source === 'Plan Your Trip') {
+                        modalTitle.textContent = "Plan Your Trip";
+                        modalDesc.textContent = "Tell us about your travel plans to get a quick estimate.";
+                        submitBtnText.textContent = "Plan via WhatsApp";
+                    } else if (source === 'Start Your Journey') {
+                        modalTitle.textContent = "Start Your Journey";
+                        modalDesc.textContent = "Ready to go? Let's get your booking started.";
+                        submitBtnText.textContent = "Start via WhatsApp";
+                    } else if (source === 'Write Your Story') {
+                        modalTitle.textContent = "Write Your Own Story";
+                        modalDesc.textContent = "Start your journey with us and create unforgettable memories.";
+                        submitBtnText.textContent = "Begin Your Story";
+                    } else if (source.startsWith('Book')) { 
+                         modalTitle.textContent = source;
+                         modalDesc.textContent = "Complete your booking details below.";
+                         submitBtnText.textContent = "Book Now";
+                    } else {
+                        modalTitle.textContent = "Get in Touch";
+                        modalDesc.textContent = "Share your details below. We'll redirect you to WhatsApp to finalize your request.";
+                        submitBtnText.textContent = "Send Inquiry";
+                    }
+                }
+            }
+
+            window.closeModal = function() {
+                if(modal) modal.classList.remove('active');
+            }
+
+            // NEW: Legal Modal Logic
+            window.openLegalModal = function(type) {
+                const modalId = type === 'privacy' ? 'privacyModal' : 'termsModal';
+                const legalModal = document.getElementById(modalId);
+                if (legalModal) legalModal.classList.add('active');
+            }
+
+            window.closeLegalModal = function(type) {
+                const modalId = type === 'privacy' ? 'privacyModal' : 'termsModal';
+                const legalModal = document.getElementById(modalId);
+                if (legalModal) legalModal.classList.remove('active');
+            }
+
+            window.submitInquiry = function(e) {
+                e.preventDefault();
+                
+                // Get Values
+                const source = document.getElementById('sourceButton').value;
+                const name = document.getElementById('name').value;
+                const countryCode = document.getElementById('country-code').value;
+                const phoneInput = document.getElementById('phone').value;
+                const fullPhone = countryCode ? `${countryCode} ${phoneInput}` : phoneInput;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                // Strict Email Validation
+                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                const emailField = document.getElementById('email');
+                
+                if (!emailPattern.test(email)) {
+                    // Visual error indication
+                    emailField.classList.add('input-error');
+                    emailField.focus();
+                    alert("Please enter a valid email address."); // Simple alert fallback
+                    return;
+                } else {
+                    emailField.classList.remove('input-error');
+                }
+
+                // Construct WhatsApp Message
+                let text = "";
+                
+                if (source === 'Start Your Journey' || source === 'Plan Your Trip') {
+                    text += `*New Journey Request: ${source}*\n\n`;
+                    text += `Hello Amfics, I would like to start my journey with you.\n\n`;
+                } else if (source === 'Write Your Story') {
+                    text += `*New Story Request*\n\n`;
+                    text += `Hello Amfics, I want to write my own story by traveling with you.\n\n`;
+                } else if (source.startsWith('Book')) {
+                    text += `*Booking Request: ${source}*\n\n`;
+                    text += `Hello Amfics, I am interested in booking the ${source.replace('Book ', '')}.\n\n`;
+                } else {
+                    text += `*New Inquiry: ${source}*\n\n`;
+                    text += `Hello Amfics, I have an inquiry about your services.\n\n`;
+                }
+
+                text += `*My Details:*\n`;
+                text += `Name: ${name}\n`;
+                text += `Phone: ${fullPhone}\n`;
+                text += `Email: ${email}\n`;
+                
+                if (message) {
+                    text += `\n*Message:*\n${message}`;
+                }
+
+                // Encode and Open WhatsApp
+                const encodedText = encodeURIComponent(text);
+                const whatsappUrl = `https://wa.me/966531581434?text=${encodedText}`;
+                
+                window.open(whatsappUrl, '_blank');
+                closeModal();
+            }
+            
+            // Close modal on Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    if (modal.classList.contains('active')) closeModal();
+                    const privacy = document.getElementById('privacyModal');
+                    const terms = document.getElementById('termsModal');
+                    if (privacy && privacy.classList.contains('active')) closeLegalModal('privacy');
+                    if (terms && terms.classList.contains('active')) closeLegalModal('terms');
+                }
+            });
+
+            // --- FLEET CAROUSEL LOGIC ---
+            const swiper = new Swiper('.fleet-swiper', {
+                spaceBetween: 24, 
+                slidesPerView: 1.1, 
+                centeredSlides: false, 
+                loop: true,
+                slideToClickedSlide: true, // Keep this enabled
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false, 
+                },
+                // Enable Pagination (Dots)
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true, // Makes the dots look cleaner if there are many
+                },
+                // Navigation removed
+                breakpoints: {
+                    768: {
+                        slidesPerView: 1.5,
+                        spaceBetween: 32,
+                    }
+                },
+                on: {
+                    slideChange: function () {
+                        // Update Info on Slide Change
+                        const realIndex = this.realIndex;
+                        document.querySelectorAll('.fleet-info').forEach((el, index) => {
+                            if (index === realIndex) {
+                                el.classList.add('active');
+                            } else {
+                                el.classList.remove('active');
+                            }
+                        });
+                    }
+                }
+            });
+
+            // Hover Logic for Auto-Scroll
+            window.stopAutoScroll = function() {
+                if(swiper && swiper.autoplay) swiper.autoplay.stop();
+            }
+
+            window.resumeAutoScroll = function() {
+                if(swiper && swiper.autoplay) swiper.autoplay.start();
+            }
+        });
+    </script>
+</body>
+</html>
